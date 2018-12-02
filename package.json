@@ -118,6 +118,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0",
+    "gh-pages": "^2.0.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0"
   }
