@@ -1,0 +1,12 @@
+
+.nav-text{
+    color: black;
+  }
+  
+  .leftNav{
+    position: fixed;
+    height: 100%;
+    border-top: none;
+  z-index: 9;
+
+  }
