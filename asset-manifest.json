@@ -1,11 +1,11 @@
 {
-  "main.js": "/static/js/main.f7751c90.chunk.js",
-  "main.js.map": "/static/js/main.f7751c90.chunk.js.map",
-  "static/js/1.930b22e1.chunk.js": "/static/js/1.930b22e1.chunk.js",
-  "static/js/1.930b22e1.chunk.js.map": "/static/js/1.930b22e1.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.5c21080e56fba0f3209d60760ba97bd9.js": "/precache-manifest.5c21080e56fba0f3209d60760ba97bd9.js",
-  "service-worker.js": "/service-worker.js"
+  "main.js": "/netunion_web/static/js/main.f7751c90.chunk.js",
+  "main.js.map": "/netunion_web/static/js/main.f7751c90.chunk.js.map",
+  "static/js/1.930b22e1.chunk.js": "/netunion_web/static/js/1.930b22e1.chunk.js",
+  "static/js/1.930b22e1.chunk.js.map": "/netunion_web/static/js/1.930b22e1.chunk.js.map",
+  "runtime~main.js": "/netunion_web/static/js/runtime~main.9e011c04.js",
+  "runtime~main.js.map": "/netunion_web/static/js/runtime~main.9e011c04.js.map",
+  "index.html": "/netunion_web/index.html",
+  "precache-manifest.44a7b7c37b8e35dee5fd941569c01c9f.js": "/netunion_web/precache-manifest.44a7b7c37b8e35dee5fd941569c01c9f.js",
+  "service-worker.js": "/netunion_web/service-worker.js"
 }
