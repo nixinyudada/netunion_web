@@ -22,7 +22,7 @@ class LeftNav extends React.Component {
             }}
           >
             <div className="logo" />
-            <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+            <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1"
               >
                 <NavLink to="/welcome">

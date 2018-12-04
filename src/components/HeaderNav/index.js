@@ -63,7 +63,8 @@ export default class HeaderNav extends React.Component {
         <Row>
           <Col lg={{ span: 2, offset: 1 }} xs={{ span: 7, offset: 1 }}>
             <div className="imgDiv">
-              <img src="./../../../img/nuer.png" alt="nuer" className={`animated infinite ${this.state.animate}`} />
+              {/* <img src="./../../../img/nuer.png" alt="nuer" className={`animated infinite ${this.state.animate}`} /> */}
+              <img src="https://nixinyudada.github.io/netunion_web/img/nuer.png" alt="nuer" className={`animated infinite ${this.state.animate}`} />
               <p className="UnionTitle">UESTC <br /> 网管会</p>
             </div>
           </Col>

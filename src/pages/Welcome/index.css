@@ -1,0 +1,6 @@
+.personInfo{
+    transition: all 0.5s ease 0.1s;
+}
+.personInfo:hover{
+    box-shadow: 0px 0px 8px #ccc;
+}

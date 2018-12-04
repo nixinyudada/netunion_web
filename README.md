@@ -42,3 +42,42 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+## 如何部署React项目到 GitPage 
+
+1. 将需要部署的项目文件打包成build文件
+
+2. 安装 gh-pages
+
+`npm install gh-pages --save-dev`
+
+3. 配置package.json文件
+
+!()[https://img-blog.csdn.net/20180601163847227?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1F1ZV9MaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70]
+
+> "homepage": "https://queli1990.github.io/test"
+
+> "predeploy": "npm run build",
+> "deploy": "gh-pages -d build"
+
+4. 执行部署命令
+
+`npm run deploy`
+
+5. 访问 
+
+git io 后面加上项目名
+
+> https://nixinyudada.github.io/netunion_web/#/feedback
+
+
+
+
+
+
+
+
