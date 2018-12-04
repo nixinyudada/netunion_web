@@ -72,7 +72,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 git io 后面加上项目名
 
-> https://nixinyudada.github.io/netunion_web/#/feedback
+> https://nixinyudada.github.io/netunion_web/
 
 
 

@@ -66,15 +66,15 @@ export default class OrganizationMenu extends React.Component {
                 <div className="menu" onClick={this.handleStopAnimateMenu} ref="menuUL">
                     <ul>
                         <li style={{background:"orange"}}>
-                            <a href="http://www.baidu.com">运维部</a>
+                            <a style={{color:"white"}} href="http://www.baidu.com">运维部</a>
                         </li>
-                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px"}}>网络管理员</a></li>
-                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px"}}>系统管理员</a></li>
-                        <li style={{lineHeight:"25px",background:"orange"}}><a href="http://www.baidu.com">研发部</a></li>
-                        <li><a href="http://www.baidu.com">JAVA</a></li>
-                        <li><a href="http://www.baidu.com">PHP</a></li>
-                        <li><a href="http://www.baidu.com">Web前端</a></li>
-                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px"}}>UI/视觉设计</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>网络管理员</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>系统管理员</a></li>
+                        <li style={{lineHeight:"25px",background:"orange"}}><a style={{color:"white"}} href="http://www.baidu.com">研发部</a></li>
+                        <li><a href="http://www.baidu.com" style={{color:"white"}}>JAVA</a></li>
+                        <li><a href="http://www.baidu.com" style={{color:"white"}}>PHP</a></li>
+                        <li><a href="http://www.baidu.com" style={{color:"white"}}>Web前端</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>UI/视觉设计</a></li>
                     </ul>
                 </div>
             </div>
