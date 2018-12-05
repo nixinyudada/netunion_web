@@ -9,7 +9,7 @@ import { Row, Col } from 'antd';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="index">
         <HeaderNav></HeaderNav>
         <Row>
           <Col span={4}>
