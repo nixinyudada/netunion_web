@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>网管会报名信息</title>
+    <link rel="stylesheet" href="css/signUpInfo.css">
+</head>
+
+<body>
+
+    <h1>报名列表</h1>
+    <br>
+    <button style="display: block;width: 100px;height: 30px;" id="reverse">倒序</button>
+    <br />
+    <hr style="width:300px">
+    <br>
+    <ul id="jobListUl">
+    </ul>
+
+    <div class="detailsModal">
+        <ul id="details">
+            <li>
+                <label for="name">姓名：</label>
+                <div id="name"></div>
+            </li>
+            <li>
+                <label for="school"></label>
+                <div id="school">学院</div>
+            </li>
+            <li>
+                <label for="specialit">专业：</label>
+                <div id="specialit"></div>
+            </li>
+            <li>
+                <label for="studentID">学号:</label>
+                <div id="studentID"></div>
+            </li>
+            <li>
+                <label for="EMail">E-mail:</label>
+                <div id="EMail"></div>
+            </li>
+            <li>
+                <label for="phoneNumber">学号：</label>
+                <div id="phoneNumber"></div>
+            </li>
+            <li>
+                <label for="job">应聘职位：</label>
+                <div id="job"></div>
+            </li>
+            <li>
+                    <label for="sex">性别：</label>
+                    <div id="sex"></div>
+                </li>
+                <li>
+                        <label for="personalInfo">个人信息：</label>
+                        <div id="personalInfo"></div>
+                    </li>
+        </ul>
+    </div>
+    <script src="../js-lib/jquery.js"></script>
+    <script>
+        (function(){
+            var job = document.getElementById("job");
+            var details = document.getElementById("details");
+            var jobList = document.getElementById("jobListUl");
+            var reverse = document.getElementById("reverse");
+
+            
+
+
+
+            var data = $.ajax({
+                type:"get",
+                url:"http://localhost:3000/users",
+                async:false,
+                dataType:"json",
+            });
+
+            
+
+
+            for(var i = 0;i<data.responseJSON.length;i++){
+                        var strList = "<li><p>应聘职位："+data.responseJSON[i]["job"]+"</p><button name="+i+" type='button'>详情</button></li>";
+                        console.log(strList)
+                        jobList.innerHTML += strList;
+                    }
+                    var detailsBtn = jobList.getElementsByTagName("button")
+            
+            for(var i=0;i<detailsBtn.length;i++){
+                detailsBtn[i].addEventListener("click",()=>{
+                    detailsFunc();
+                })
+            }
+            function detailsFunc(){
+                var index = event.target.name;
+                var str = `
+                <li>
+                <label for="name">姓名：</label>
+                <div id="name">${data.responseJSON[index]["name"]}</div>
+            </li>
+            <li>
+                <label for="school">学院:</label>
+                <div id="school">${data.responseJSON[index]["college"]}</div>
+            </li>
+            <li>
+                <label for="specialit">专业：</label>
+                <div id="specialit">${data.responseJSON[index]["speciality"]}</div>
+            </li>
+            <li>
+                <label for="studentID">学号:</label>
+                <div id="studentID">${data.responseJSON[index]["studentID"]}</div>
+            </li>
+            <li>
+                <label for="EMail">E-mail:</label>
+                <div id="EMail">${data.responseJSON[index]["EMail"]}</div>
+            </li>
+            <li>
+                <label for="job">应聘职位：</label>
+                <div id="job">${data.responseJSON[index]["job"]}</div>
+            </li>
+            <li>
+                    <label for="sex">性别：</label>
+                    <div id="sex">${data.responseJSON[index]["sex"]}</div>
+                </li>
+                <li>
+                        <label for="personalInfo">个人信息：</label>
+                        <div id="personalInfo">${data.responseJSON[index]["personalInfo"]}</div>
+                    </li>
+                `;                
+                document.getElementById("details").innerHTML = str;
+            }
+
+
+
+var t = false;
+            reverse.onclick = () => {
+                if(t){
+                    t=false;
+                    jobList.innerHTML = "";
+                    for(var i = 0;i<data.responseJSON.length;i++){
+                        
+                jobList.innerHTML += "<li><p>"+data.responseJSON[i]["job"]+"</p><button name="+i+" type='button'>详情</button></li>";
+                console.log(detailsBtn[0].name)
+                for(var i=0;i<detailsBtn.length;i++){
+                detailsBtn[i].addEventListener("click",()=>{
+                    detailsFunc();
+                })
+            }
+            }
+                }else{
+                    jobList.innerHTML = "";
+                    t=true;
+                    for(var j = data.responseJSON.length-1;j>0;j--){
+                        console.log(data.responseJSON[j]["job"])
+                jobList.innerHTML += "<li><p>"+data.responseJSON[j]["job"]+"</p><button name="+j+" type='button'>详情</button></li>";
+            
+        }
+                console.log(detailsBtn[0].name)
+                for(var i=0;i<detailsBtn.length;i++){
+                detailsBtn[i].addEventListener("click",()=>{
+                    detailsFunc();
+                })
+            }
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>

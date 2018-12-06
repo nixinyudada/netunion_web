@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #data{
+            width: 100px;
+            height: 100px;
+            background: red;
+
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div id="data">
+
+    </div>
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        (function(){
+
+            var sendData={
+                "id":"123dasd&wq%wE22222er#daw",
+                "name":"zhangsan",
+                "college":"信息与软件工程学院",
+                "speciality":"软件工程",
+                "studentID":"2017********",
+                "EMail":"",
+                "phoneNumber":"13820*******",
+                "job":"前端工程师",
+                "sex":"男",
+                "personalInfo":"平日里，我是一个开朗随和的人***********......"
+            }
+
+            document.getElementById("data").onclick = () => {
+                var id = Math.floor(Math.random()*100000);
+                console.log("id->"+id);
+                var sendData={
+                "id":"123dasd&wq%wE22222er#daw"+id,
+                "name":"nixinyu",
+                "college":"信息与软件工程学院",
+                "speciality":"软件工程",
+                "studentID":"2017********",
+                "EMail":"",
+                "phoneNumber":"13820*******",
+                "job":"前端工程师",
+                "sex":"男",
+                "personalInfo":"平日里，我是一个开朗随和的人***********......"
+            }
+               $.ajax({
+                type:"put",
+                url:"http://localhost:3000/users/nixinyu",
+                async:false,
+                dataType:"json",
+                data:sendData,
+                success:function(data){
+                    console.log(data)
+                },
+                error:function(error){
+                    console.log(error)
+                }
+            });
+            }
+            
+
+
+        //    for(var item in data.responseJSON[0]){
+        //        console.log(item,"->",data.responseJSON[0][item])
+        //    } 
+            
+        })()
+    </script>
+</body>
+</html>

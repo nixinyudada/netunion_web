@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>报修情况</title>
+    <link rel="stylesheet" href="css/dormRepair.css">
+    <style>
+        h1 {
+            background: red;
+            color: white;
+            text-align: center;
+        }
+
+        #repairListContent {
+            width: 300px;
+            height: 550px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+            float: left;
+            box-sizing: border-box;
+            margin: 0px;
+            overflow: auto;
+        }
+
+        #repairListContent>li {
+            width: 80%;
+            height: 40px;
+            border: 1px solid #ccc;
+            margin-top: 2px;
+            padding: 0px;
+            list-style-type: none;
+            /* background: #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            line-height: 40px;
+            text-indent: 1em;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 5px #ccc; */
+        }
+
+        .repairList {
+            background: darkcyan;
+        }
+
+        #repairListContent>li p {
+            width: 80%;
+            height: 40px;
+            line-height: 40px;
+            text-indent: 1em;
+            margin: 0px;
+            background: #ccc;
+            float: left;
+        }
+
+        #repairListContent>li>button {
+            width: 20%;
+            float: right;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .repairContent {
+            width: 500px;
+            height: 550px;
+            background: #ccc;
+            float: left;
+            margin-left: 100px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+            padding: 0px;
+        }
+        
+        .repairContent > ul{
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+        .repairContent > ul > li {
+            box-sizing: border-box;
+            list-style-type: none;
+            display: flex;
+            height: 40px;
+            line-height: 40px;
+            width: 90%;
+            margin: 2px auto;
+            padding: 0px;
+        }
+        .repairContent > ul > li label{
+            width: 100px;
+            height: 40px;
+            display: block;
+            text-align: center;
+
+            background: darkgrey;
+        }
+        .repairContent > ul > li p{
+            height: 40px;
+            width: 400px;
+            text-indent: 1em;
+            color: white;
+            background: darkcyan;
+        }        
+        .repairContent > ul > li label,.repairContent > ul > li p {
+            margin: 0px;
+            padding: 0px;
+            font-size: 14px;
+        }
+        .mainlog{
+            width: 100%;
+            height: 38px;
+            margin: 0px;
+            box-sizing: border-box;
+            background: darkcyan;
+            border: none;
+            color: white;
+            text-indent: 1em;
+        }
+        .repairContent > ul > li > button{
+            width: 100px;
+            height: 40px;
+            margin: 0px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #000;
+            background: green;
+            border: none;
+            color:white;   
+        }   
+    </style>
+</head>
+
+<body>
+    <h1>报修情况总览</h1>
+    <div class="repairList">
+        <ul id="repairListContent">
+            <br>
+            <!-- <li>
+                <p>宿舍号：3-556</p>
+                <button>详情</button>
+            </li> -->
+        </ul>
+    </div>
+
+    <div id="repairContent" class="repairContent">
+        <!--
+            {
+                "dormNum": "3-556",
+                "contactNum": "1352442****",
+                "statusDescribe": "1dasd描述！！！！",
+                "sendDate": "2018-12-12"
+            }
+        --> 
+        <br>
+
+        <!-- <ul>
+            <li>
+                <label>宿舍号：</label>
+                <p>欣苑-3-303</p>
+            </li>
+            <li>
+                <label>电话：</label>
+                <p>1343546654</p>
+            </li>
+            <li>
+                <label>备注：</label>
+                <p>断网</p>
+            </li>
+            <li>
+                <label>时间：</label>
+                <p>2018-05-04</p>
+            </li>
+            <li>
+                <label>状态：</label>
+                <p>
+                    <select name="" disabled id="">
+                        <option value="0">未读</option>
+                        <option value="1">已读</option>
+                        <option value="2">已解决</option>
+                        <option value="3">未解决</option>
+                    </select>
+                </p>
+            </li>
+            <li>
+                <label>运维备注：</label>
+                <p style="text-indent:0em;"><input disabled type="text" class="mainlog" value="小问题，已解决！"></p>
+            </li>
+            <br>
+            <li>
+                <button>编辑</button>
+            </li>
+        </ul> -->
+    </div>
+
+
+    <script src="../js-lib/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            var repairListContent = document.getElementById("repairListContent");
+            var repairContent = document.getElementById("repairContent");
+            var data = $.ajax({
+                url: "http://localhost:3000/repair",
+                type: "get",
+                dataType: "json",
+                async: false
+            });
+            var jsonData = data.responseJSON;
+            for (var item in data.responseJSON) {
+                console.log(jsonData[item]["dormNum"])
+                repairListContent.innerHTML += `
+                    <li>
+                        <p>${jsonData[item]["dormNum"]}</p>
+                        <button name=${jsonData[item]["id"]}>详情</button>    
+                    </li> 
+                `;
+            }
+
+            var btns = repairListContent.getElementsByTagName("button");
+            for(var i = 0;i<btns.length;i++){
+                btns[i].addEventListener("click",()=>{
+                    showInfo();
+                })
+            }
+
+            showInfo = () => {
+               console.log(event.target.name);
+                var id = event.target.name;
+                var data = ajaxRepairGet("http://localhost:3000/repair?id="+id);
+                console.log(data);
+                data = data[0];
+                repairContent.innerHTML = `
+                <br/>
+                <ul>
+            <li>
+                <label>宿舍号：</label>
+                <p>${data["dormNum"]}</p>
+            </li>
+            <li>
+                <label>电话：</label>
+                <p>${data["contactNum"]}</p>
+            </li>
+            <li>
+                <label>备注：</label>
+                <p>${data["statusDescribe"]}</p>
+            </li>
+            <li>
+                <label>时间：</label>
+                <p>${data["sendDate"]}</p>
+            </li>
+            <li>
+                <label>状态：</label>
+                <p>
+                    <select name="" disabled id="repairStatus">
+                        <option value="0">未读</option>
+                        <option value="1">已读</option>
+                        <option value="2" selected>已解决</option>
+                        <option value="3">未解决</option>
+                    </select>
+                </p>
+            </li>
+            <li>
+                <label>运维备注：</label>
+                <p style="text-indent:0em;"><input disabled id="mainLogInput" type="text" class="mainlog" value="${data["mainlog"]}"></p>
+            </li>
+            <br>
+            <li>
+                <button id="edit">编辑</button>
+            </li>
+        </ul>
+                `;
+
+                var repairStatus = document.getElementById("repairStatus");
+                repairStatus[data["status"]].selected = true;
+                var edit = document.getElementById("edit");
+                var mainLogInput = document.getElementById("mainLogInput");
+                var t = true;
+                edit.onclick = () => {
+                    if(t){
+                        repairStatus.removeAttribute("disabled");
+                        mainLogInput.removeAttribute("disabled");
+                        mainLogInput.style.border = "1px soild green";
+                        mainLogInput.style.background = "white";
+                        mainLogInput.style.color = "red";
+                        event.target.innerHTML = "完成";
+                        t = false;
+                    }else{
+                        repairStatus.setAttribute("disabled","disabled");
+                        mainLogInput.setAttribute("disabled","disabled");
+                        mainLogInput.style.border = "none";
+                        mainLogInput.style.background = "darkcyan";
+                        mainLogInput.style.color = "white";
+                        event.target.innerHTML = "完成";
+                        console.log(mainLogInput.value,repairStatus.value)
+                        var sendData = {
+                            "id": data["id"],
+                            "dormNum": data["dormNum"],
+                            "contactNum": data["contactNum"],
+                            "statusDescribe": data["statusDescribe"],
+                            "mainlog":mainLogInput.value,
+                            "status":repairStatus.value,
+                            "sendDate": "2018-11-23 20:2:48"
+                        }
+
+                        var meg = ajaxRepairPut("http://localhost:3000/repair/"+data["id"],sendData);
+                        t = false;
+                    }
+                    
+                }
+            }
+
+            ajaxRepairGet = (urlPath) => {
+                console.log(urlPath)
+                var data = $.ajax({
+                    url: urlPath,
+                    type: "get",
+                    dataType: "json",
+                    async: false
+                });
+                return data.responseJSON;
+            }
+            ajaxRepairPut = (urlPath,sendData) => {
+                console.log(urlPath)
+                var data = $.ajax({
+                    url: urlPath,
+                    type: "put",
+                    data:sendData,
+                    dataType: "json",
+                    async: false
+                });
+                return data.responseJSON;
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

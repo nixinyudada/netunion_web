@@ -1,5 +1,5 @@
 import React from "react"
-import { Breadcrumb, Icon, Row, Col, Skeleton, Card} from "antd"
+import { Breadcrumb, Icon, Row, Col, Skeleton, Card,Button} from "antd"
 import OrganizationMenu from "./../organizationMenu"
 import "./index.css"
 
@@ -61,6 +61,14 @@ export default class Welcome extends React.Component {
                     <Row>
                         <Col lg={{ span: 11, offset: 1 }} xs={{ offset: 0 }}>
                             <OrganizationMenu></OrganizationMenu>
+                        </Col>
+                        <Col lg={{offset:4,span:6}}>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2>
+                            <Icon type="user-add" />&nbsp;<a className="joinUsATag" href="https://nixinyudada.github.io/netunion_web/#/joinUs">加入我们>>></a>
+                            </h2>
                         </Col>
                     </Row>
                     <br />

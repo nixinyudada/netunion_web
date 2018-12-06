@@ -1,0 +1,179 @@
+@font-face {
+    /* font-properties */
+    font-family: pictos;
+    src:url('pictos/pictos-web.woff'),
+    url('pictos/pictos-web.ttf'),
+    url('pictos/pictos-web.eot'); /* IE9 */
+}
+.root{
+			width:90%;
+			height: 90%;
+			padding-top: 5%;
+			padding-left: 5%;
+			position: relative;
+		}
+		.container{
+			width: 100%;
+			height: 100%;
+			transform-style: preserve-3d;
+		}
+		.box1{
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			border: 4px dashed orange;
+			animation: root 16s infinite linear;
+		}
+		
+		.box2{
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			top: 14px;
+			left: 15px;
+			z-index: -1;
+		}
+		.box2 img{
+			width: 100%;
+			height: 100%;
+		}
+		@keyframes root{
+			0% {transform:rotate(-10deg) rotateX(-20deg) rotateY(0deg)}
+            100% {transform:rotate(-10deg) rotateX(-20deg) rotateY(360deg)}
+		}
+
+
+
+
+
+
+		.joinUs{
+			width: 100%;
+			height: 500px;
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			background: rgba(0, 0, 0, 0.438);
+			z-index: 999999;
+			overflow: hidden;
+			overflow: scroll;
+			display: none;
+		}
+		.joinUs ul{
+			width: 100%;
+			height: 100%;
+		}
+		.joinUs ul li{
+			list-style-type: none;
+			width: 100%;
+			height: 50px;
+			margin: 5px;
+			border-radius: 5px;
+			background: rgba(255, 174, 0, 0.877);
+		}
+		.joinUs ul li .joinUsBtn{
+			width: 100%;
+			height: 100%;
+			text-align: center;
+		}
+		.joinUs ul li .joinUsBtn button{
+			width: 100px;
+			margin-top: 5px;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px #000;
+			background: darkcyan;
+			color: white;
+		}
+		.inputClass{
+			height: 50px;
+			width: 26%;
+			float: left;
+			text-align: center;
+			line-height: 50px;
+		}	
+		.inputText{
+			height: 40px;
+			width: 70%;
+			float: left;
+			margin-top: 5px;
+			margin-right: 2%;
+			border: none;
+			box-shadow: 0px 0px 5px #000;
+			border-radius: 5px;
+			text-indent: 1em;
+			box-sizing: border-box;
+		}
+		.joinUs ul .personal_information{
+			width: 100%;
+			height: 150px;
+		}
+		.joinUs ul .personal_information textarea{
+			width: 70%;
+			height: 130px;
+			margin-top: 10px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px #000;
+			text-indent: 1em;
+			padding-top: 1em;
+			box-sizing: border-box;
+		}
+		li h1{
+			text-align: center;
+			color: #000;
+		}
+		.joinUsErrorAlert{
+			width: 80%;
+			height: 150px;
+			position: fixed;
+			top: 100px;
+			left: 0px;
+			border: 1px solid #000;
+			border-radius: 5px;
+			box-sizing: border-box;
+			box-shadow: 0px 0px 5px #000;
+			margin: 0px 10%;
+			z-index: 9999999;
+			background: blue;
+			color: white;
+			display: none;
+		}
+		.joinUsErrorAlert_close_notice{
+			width: 150px;
+			height: 30px;
+			line-height: 30px;
+			text-indent: 1em;	
+			float: left;
+			color: white;
+		}
+		.joinUsErrorAlert_close{
+			width: 30px;
+			height: 30px;
+			border: 1px solid #000;
+			border-radius: 5px;
+			box-sizing: border-box;
+			float: right;
+			text-align: center;
+			line-height: 30px;
+			font-size: 20px;
+			font-weight: bold;
+			margin: 2px;
+			transition: all 0.8s ease 0.1s;
+		}
+		.joinUsErrorAlert_close:hover{
+			background: red;
+		}
+		.joinUsErrorAlert_content{
+			width: 100%;
+			height: 115px;
+			border-top: 1px solid #000;
+			border-radius: 0px 0px 5px 5px;
+			clear: both;
+			text-indent: 2em;
+			background: black;
+			color:green;
+			box-sizing: border-box;
+			padding: 10px;
+		}

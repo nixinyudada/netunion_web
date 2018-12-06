@@ -1,0 +1,51 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    padding-left: 20px;
+}
+.jobListUl{
+    width: 300px;
+    height: 400px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#jobListUl > li{
+width: 400px;
+height: 40px;
+border: 1px solid #ccc;
+box-sizing: border-box;
+margin-bottom: 10px;
+list-style-type: none;
+}
+#jobListUl > li p{
+    width: 70%;
+    height: 100%;
+    display: block;
+    float: left;
+    text-align: left;
+    line-height: 40px;
+}
+#jobListUl > li button{
+    width: 20%;
+    height: 100%;
+    display: block;
+    float: left;
+}
+
+.detailsModal{
+    width: 300px;
+    height: 500px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 5px #000;
+    box-sizing: border-box;
+    position: fixed;
+    top: 50px;
+    right: 200px;
+}
+
+
+

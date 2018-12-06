@@ -4,3 +4,8 @@
 .personInfo:hover{
     box-shadow: 0px 0px 8px #ccc;
 }
+
+.joinUsATag{
+    font-size: 20px;
+    color: #302d2d;
+}

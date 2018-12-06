@@ -1,0 +1,110 @@
+.organization{
+	width: 100%;
+	height: 500px;
+	margin-top: 0px;
+	background-image: url('../img/job-bg.jpg');
+}
+.organ_box{
+	width: 80%;
+	margin: 0 10%;
+	height: 360px;
+	border: 1px solid #000;
+	border-radius: 10%;
+	box-shadow: 0px 0px 25px #000;
+	overflow: hidden;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: white;
+}
+
+.leader{
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.3);
+}
+.maintain{
+	width: 100%;
+	height: 140px;
+	background: #ccc;
+}
+.left_maintain{
+	width: 70%;
+	height: 140px;
+	float: left;
+}
+.net{
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+	box-sizing: border-box;
+	border-bottom: 1px solid #000;
+	background: rgba(19, 135, 132, 0.9);
+	transition: all ease 0.4s;
+}
+.system{
+	width: 100%;
+	height: 50%;
+	box-sizing: border-box;
+	border-bottom: 1px solid white;
+	line-height: 70px;
+	background: rgba(19, 135, 132, 0.9);
+	transition: all ease 0.4s;
+}
+.maintain_sub{
+	width: 30%;
+	height: 100%;
+	line-height: 140px;
+	float: right;
+	border-left: 1px solid white;
+	box-sizing: border-box;
+	background: rgba(222, 158, 64, 0.9);
+	transition: all ease 0.4s;
+}
+
+.develop{
+	width: 100%;
+	height: 160px;
+}
+.develop_right{
+	width: 70%;
+	height: 160px;
+	float: right;
+}
+.develop_sub{
+	width: 30%;
+	height: 160px;
+	float: left;
+	line-height: 160px;
+	transition: all ease 0.4s;
+	background: rgba(222, 158, 64, 0.9);
+}
+.l_type{
+	width: 100%;
+	height: 40px;
+	background: rgba(19, 135, 132, 0.9);
+	border-bottom: 0.1px solid #000;
+	box-sizing: border-box;
+	line-height: 40px;
+	transition: all ease 0.4s;
+
+}
+.l_type:hover,.system:hover,.net:hover{
+	background: rgba(10, 149, 145, 0.9);
+	font-size: 20px;
+}
+
+.develop_sub:hover,.maintain_sub:hover{
+	background: orange;
+}
+
+.java_type{
+
+}
+.php_type{
+
+}
+.web_type{}
+.ui_type{}

@@ -1,0 +1,138 @@
+.member{
+    width: 100%;
+    height: 1240px;
+    background-image: url('../img/master-bg.jpg');
+    background-size: 100% 100%;
+}
+
+.member_content{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    
+}
+.tag{
+    width: 160px;
+    height: 120px;
+    margin-left: 40px;
+}
+
+.tag .text{
+    width: 100%;
+    height: 80px;
+    background: #f1792a;
+    margin: 0px;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+}
+
+.tag .tag_bottom{
+    margin-top: -2px;
+    padding: 0;
+    width: 0;
+    height: 0;
+    content: "";
+    border-bottom: 40px solid transparent;
+    border-left: 80px solid #f1792a;
+    border-right: 80px solid #f1792a;
+}
+
+.member_info{
+    width: 100%;
+    height: 1140px;
+    display: block;
+    z-index: 10;
+    margin-top: 40px;
+}
+
+.member_info li{
+    width: 100%;
+    height: 340px;
+    list-style-type: none;
+    margin: 0px;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+
+.header_img{
+    width: 100%;
+    height: 130px;
+    text-align: center;
+}
+.header_img img{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 50px 0px;
+    box-shadow: 0px 0px 3px white;
+    transition: all ease 0.8s;
+}
+.header_img img:hover{
+    border-radius: 50%;
+    border-color: orange;
+    width: 130px;
+    height: 130px;
+}
+
+.member_info > li b{
+    width: 100%;
+    height: 50px;
+    display: block;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+.member_info > li span{
+    display: block;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+}
+.member_info > li p{
+    display: block;
+    width: 100%;
+    height: 120px;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    word-break: break-all;
+    font-size: 20px;
+}
+
+.member_info > li .job{
+    width: 100%;
+    height: 10px;
+    color: white;
+    text-align: center;
+    background: orange;
+    line-height: 10px;
+    border-radius: 50px 0px;
+    transition: all ease 1s;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 0px;
+
+}
+
+.member_info > li .job:hover{
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+}
+
+.address{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    background: #ccc;
+    border-top: 1px dashed #ccc;
+}

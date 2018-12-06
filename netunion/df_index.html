@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>电子科技大学网络管理委员会</title>
+	<link rel="shortcut icon" href="img/logo32.ico">
+	<link href="https://cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="css-lib/animate.css"> -->
+	<link rel="stylesheet" href="css/df_index.css">
+	<link rel="stylesheet" href="css/organization.css">
+	<link rel="stylesheet" href="css/member.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/photo.css">
+	<style>
+		.dormRepair{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: -100%;
+			background: white;
+			z-index: 9999999;
+			transition: all 0.4s ease 0.1s;
+			
+		}
+		.dormRepair > .dormRepairContent{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+
+		@keyframes sendScale{
+			0%{
+				transform: scale(1);
+			}
+			100%{
+				transform: scale(0.3);
+			}
+		}
+		@keyframes sendRepair{
+			0%{
+				transform: rotateZ(0deg) scale(1);
+				top: 100px;
+				left: 0px;
+				
+			}
+			25%{
+				transform: scale(0.7) rotateY(10deg) rotateZ(20deg) rotateX(35deg);
+				top: 100px;
+				left: 0px;
+			}
+			60%{
+				transform: scale(0.1) translateZ(1000px) rotateY(10deg) rotateZ(20deg) rotateX(35deg);
+				top: 100px;
+				left: 0px;
+			}
+			100%{
+				transform: scale(0.1) translateZ(1000px) rotateY(10deg) rotateZ(20deg) rotateX(35deg);
+				top: -400px;
+				left: 300px;
+			}
+
+		}
+		.repairSend{
+			transform-style: preserve-3d;
+			perspective: 3000px;
+			width: 80%;
+			height: 300px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			position: absolute;
+			top: 50px;
+			left: 20px;
+			text-align: center;
+			margin: 10px auto;
+			transition: left 0.5s ease 0.1s;
+			transition: top 0.1s ease 0.1s;
+			
+			transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+		}
+		.repairSend > ul > li{
+			list-style-type: none;
+			width: 80%;
+			height: 40px;
+			margin:5px auto;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+		.repairSend > ul > li > input{
+			width: 100%;
+			height: 100%;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0px 0px 5px #ccc;
+			text-indent: 1em;
+			box-sizing: border-box;
+		}
+		.repairSend > ul > li > button{
+			width: 100px;
+			height: 40px;
+			border:1px solid #ccc;
+			border-radius: 5px;
+			background: rgba(245, 77, 10, 1);
+			color: whitesmoke;
+			font-size: 20px;
+			
+			box-shadow: 0px 0px 5px #ccc;
+		}
+	.statusDescribe{
+		text-indent: 1em;
+		padding: 5px;
+		box-sizing: border-box;
+		width: 100%;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		box-shadow: 0px 0px 5px #ccc;
+	}
+	.repairSend h3{
+
+	}
+	.repairSend .repairClose{
+		color: white;
+	width: 100px;
+	height: 40px;
+	border: 1px solid #ccc;
+	box-shadow: 0px 0px 5px #ccc;
+	border-radius: 5px;
+	background: orange;
+	}
+	</style>
+</head>
+
+<body>
+
+	<!-- 三个部门的侧边栏 -->
+	<div class="dormRepair" id="dormRepairContent">
+		<div class="dormRepairContent">
+		<h1>宿舍报修</h1>
+		<div class="repairSend" id="repairSend">
+			<br>
+			<div style="display: none;" id="repairSuccess">
+					<h3>你的报修已被提交，请耐心等待...</h3>
+					<br>
+					<br>
+					
+					<button class="repairClose" id="repairClose">关闭</button>
+			</div>
+			<ul id="repairUl">
+				
+				<!-- 宿舍号，联系电话，状况描述及备注 -->
+				<li>
+					<input type="text" placeholder="宿舍号" id="dormID">
+				</li>
+				<li>
+					<input type="text" placeholder="联系电话" id="contactNum">
+				</li>
+				<li style="height:80px;">
+					<textarea class="statusDescribe" placeholder="状况描述及备注" name="" id="statusDescribe" cols="30" rows="5"></textarea>
+				</li>
+				<br>
+				<li>
+					<button id="closeRepair">关闭</button>
+					<button id="submitRepair">提交</button>
+
+				</li>
+			</ul>
+		</div>
+		</div>	
+	</div>
+
+
+	<!-- join us 表单输入框 错误提示  -->
+	<div class="joinUsErrorAlert" id="joinUsErrorAlert">
+		<div class="joinUsErrorAlert_close_notice">不能这么填写！</div>
+		<div class="joinUsErrorAlert_close" id="joinUsErrorAlert_close" onclick="joinUsErrorAlert_close_func()">x</div>
+		<div class="joinUsErrorAlert_content" id="joinUsErrorAlert_content"> 
+			
+		</div>
+	</div>
+
+	<!-- join us 表单输入框  -->
+	<div id="joinUs" class="joinUs animated bounceInUp">
+		<ul>
+			<li>
+				<h1 class="animated tada infinite">欢迎加入网管会！</h1>
+			</li>
+			<li>
+				<div id="jName_text" class="inputClass">姓名：</div>
+				<input id="jName" placeholder="姓名" type="text" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">学院：</div>
+				<input id="jSchool" value="" type="text" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">专业：</div>
+				<input value="" id="jSpeciality" type="text" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">学号：</div>
+				<input id="jSchoolNumber" value="" type="text" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">E-mail：</div>
+				<input type="text" id="jE_Mail" value="" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">电话：</div>
+				<input type="text" id="jTellPhone" value="" class="inputText">
+			</li>
+			<li>
+				<div class="inputClass">应聘职位：</div>
+				<select name="" value="" id="jJob" class="inputText">
+						<option value="Java">Java</option>
+						<option value="Web前端">Web前端</option>
+						<option value="网络管理员">网络管理员</option>
+						<option value="系统管理员">系统管理员</option>
+						<option value="UI/视觉设计">UI/视觉设计</option>
+					</select>
+			</li>
+			<li>
+				<div class="inputClass">性别：</div>
+				<select name="" id="jSex" class="inputText">
+						<option value="">性别</option>
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>			
+			</li>
+
+			<li class="personal_information">
+				<div class="inputClass">个人介绍：</div>
+				<textarea name="" id="j_personal_information" class="" id="" cols="30" rows="10"></textarea>
+			</li>
+
+			<li>
+				<div class="joinUsBtn">
+						<button type="button" id="joinUsBack">back!</button>
+						<button type="button" id="joinUsCommit">提交</button>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+
+
+	<!-- 成员相册 -->
+	<div class="photo" id="photo">
+		<div class="photo_text">成员相册：</div>
+		<div id="close_photo_btn">x</div>
+		<ul id="member_img">
+			<li class="animated rollIn delay-2s"><img src="images/photoWall/1.jpg" alt=""></li>
+			<li class="animated slideInDown delay-4s"><img src="images/photoWall/2.jpg" alt=""></li>
+			<li class="animated slideInRight delay-2s"><img src="images/photoWall/3.jpg" alt=""></li>
+			<li class="animated rotateInUpLeft delay-2s"><img src="images/photoWall/5.jpg" alt=""></li>
+			<li class="animated rotateIn delay-2s"><img src="images/photoWall/6.jpg" alt=""></li>
+
+			<li class="animated lightSpeedIn delay-2s"><img src="images/photoWall/11.jpg" alt=""></li>
+			<li class="animated rollIn delay-2s"><img src="images/photoWall/12.jpg" alt=""></li>
+			<li class="animated rubberBand delay-2s"><img src="images/photoWall/13.jpg" alt=""></li>
+			<li class="animated rotateInDownRight delay-2s"><img src="images/photoWall/14.jpg" alt=""></li>
+			<li class="animated bounceInUp delay-2s"><img src="images/photoWall/15.jpg" alt=""></li>
+			<li class="animated bounceInUp delay-2s"><img src="images/photoWall/16.jpg" alt=""></li>
+			<!-- 4.jpg放到最后，大小宽度特殊 -->
+			<li class="animated bounceInUp delay-2s"><img src="images/photoWall/4.jpg" alt=""></li>
+		</ul>
+	</div>
+	<!-- 小图点击后展示大图区域 -->
+	<div class="big_photo animated bounceIn delay-2s" id="big_photo">
+		<div class="close_bigBox" id="close_bigBox">X</div>
+		<img id="big_img" src="images/photoWall/1.jpg" alt="">
+		<div class="control_photo_direction">
+			<div id="photo_left">
+				<-</div> <div id="photo_right">->
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="nav_curtain" id="nav_curtain">
+
+		<br>
+		<br>
+		<ul>
+			<li class="nav_box animated infinite bounce">主席团</li>
+			<li class="nav_box animated infinite wobble">运维部</li>
+			<li class="nav_box animated infinite swing">研发部</li>
+			<li id="member_photo_btn" class="nav_box animated infinite swing">成员相册</li>
+			<li id="dormRepair" style="background:rgba(245, 77, 10, 1);" class="nav_box animated infinite pulse">报修</li>
+			<li id="joinUsBtn" class="nav_box animated infinite pulse">join us</li>
+		</ul>
+
+	</div>
+	<div onclick="hidden_logo()" id="showLogo" class="show_logo">
+		<div class="text" id="text">
+			电子科技大学学生宿舍网络管理委员会（即网管会,英文全称NetUnion,简称NU）,原名网盟,成立于1999年11月,现隶属于电子科技大学信息中心。从建立网管会到现在，网管会历届有很多的牛人，他们是我们学习的目标和动力。
+		</div>
+		<div class="show_big_logo" id="show_big_logo">
+			<div class="root">
+				<div class="container">
+					<div class="box1"></div>
+					<div class="box2 animated infinite pulse delay-20s">
+						<img src="img/logo.png" alt="网管会">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="nav" id="nav">
+		<div class="logo" onclick="show_logo()">
+			<div class="root" id="before_logo">
+				<div class="container">
+					<div class="box1"></div>
+					<div class="box2 animated infinite pulse delay-20s">
+						<img src="img/logo.png" alt="网管会">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="button_nav" onclick="show_button()">三</div>
+	</div>
+
+	<div class="header">
+		<img src="img/headbgimg.png" alt="">
+	</div>
+
+	<!-- 介绍 -->
+	<div class="about">
+		<img src="img/about.png" alt="">
+		<div class="aboutTop">
+			<marquee>公告：网管会招新，后端JAVA，运维</marquee>
+		</div>
+		<div class="text_div_about">
+			<h3>网络管理委员会</h3>
+			<br>
+			<p>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电子科技大学学生宿舍网络管理委员会（即网管会,英文全称NetUnion,简称NU）,原名网盟。致力于维护电子科技大学沙河校区学生宿舍网络的正常使用.
+			</p>
+			<br>
+			<b>我们可以提供:</b>
+			<br>
+			<p>1.为您提供全面的网络知识的学习方法和资料</p>
+			<br>
+			<p>2.为您营造适宜的工作环境和浓厚的学习氛围</p>
+			<br>
+			<p>3.为您共同探讨最前沿的网络技术和学习心得</p>
+			<br>
+			<p>4.为您提供全真网络环境下各种设备实践机会</p>
+		</div>
+	</div>
+
+
+	<!-- 网管会组织结构 -->
+	<div class="organization">
+		<br>
+		<br>
+		<br>
+
+		<div class="organ_box">
+			<div class="leader">主席团</div>
+			<div class="maintain">
+				<div class="left_maintain">
+					<div class="net">网络管理员</div>
+					<div class="system">系统管理员</div>
+				</div>
+				<div class="maintain_sub">运维部</div>
+			</div>
+			<div class="develop">
+				<div class="develop_sub">研发部</div>
+				<div class="develop_right">
+					<div class="l_type">Java</div>
+					<div class="l_type">PHP</div>
+					<div class="l_type">Web前端</div>
+					<div class="l_type" style="border:none;">UI/视觉设计</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 牛人介绍 -->
+	<div class="member">
+		<div class="member_content">
+
+			<div class="tag">
+				<div class="text">Daren Introduction</div>
+				<div class="tag_bottom"></div>
+			</div>
+			<ul class="member_info">
+				<li>
+					<div class="header_img">
+						<img id="job_img_1" src="img/github.jpg" alt="">
+					</div>
+					<b>王树根</b>
+					<span>2013信软</span>
+					<p>参与众多校内校外项目，中国科学院计算所研究生在读。</p>
+					<div class="job" id="job_text_1">全栈工程师</div>
+				</li>
+				<li>
+					<div class="header_img">
+						<img id="job_img_2" src="img/linux.jpg" alt="">
+					</div>
+					<b>邢博峰</b>
+					<span>信软2014级</span>
+					<p>曾于网易有道实习，现在深圳腾讯工作。</p>
+					<div class="job" id="job_text_2">前端开发工程师</div>
+				</li>
+
+				<li>
+					<div class="header_img">
+						<img id="job_img_3" src="img/nuer.png" alt="">
+					</div>
+					<b>You</b>
+					<span>2018-2019</span>
+					<p>还有很多大神，但我们相信下一个大神就是你。</p>
+					<div class="job" id="job_text_3">热爱网络的你</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	<!-- load curtain -->
+	<div class="load_curtain" id="load_curtain">
+			<div class="container">
+				<img class="animated bounce infinite" src="img/logo.png" alt="电子科技大学网盟">
+			</div>
+			<p>请稍等...</p>
+		</div>
+
+	<!-- 地址 -->
+	<div class="address">
+		地址：电子科技大学（沙河校区）阳光餐厅后
+	</div>
+    <script src="js-lib/jquery.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/photo.js"></script>
+	<script src="js/joinUs.js"></script>
+	<script src="js/dormRepair.js"></script>
+	<script>
+		window.addEventListener("DOMContentLoaded",function(){
+			get_id('load_curtain').style.display = 'none';
+		})
+
+	</script>
+</body>
+
+</html>
