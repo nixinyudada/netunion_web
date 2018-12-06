@@ -28,7 +28,7 @@ export default class DormFix extends React.Component {
                 <h4 style={{ marginBottom: "10px" }}>欢迎使用线上寝室报修系统</h4>
 
                 <Row>
-                    <Col lg={{ span: 10, offset: 1 }} xs={{ span: 10, offset: 1 }}>
+                    <Col lg={{ span: 10, offset: 1 }} xs={{span:22}}>
                         <Form>
                             <FormItem
                                 {...formItemLayout}

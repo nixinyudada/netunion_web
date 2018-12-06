@@ -62,6 +62,7 @@ export default class JoinUs extends React.Component {
         option.map((value)=>{
             let {props} = value;
             job.push(props.value)
+            return ""
         })
 
         this.setState({
@@ -121,7 +122,7 @@ export default class JoinUs extends React.Component {
                 <h4 style={{ marginBottom: "10px" }}>欢迎加入电子科技大学
                 沙河网络管理委员会</h4>
                 <Row>
-                    <Col lg={{ span: 10, offset: 1 }} xs={{ span: 10, offset: 1 }}>
+                    <Col lg={{ span: 10, offset: 1 }} xs={{span:22}}>
                         <Form>
                             <FormItem
                                 {...formItemLayout}
@@ -129,9 +130,8 @@ export default class JoinUs extends React.Component {
                                 validateStatus="error"
                                 hasFeedback
                                 help="该项不能为空！"
-                                
                             >
-                                <Input id="error" onChange={this.handleNameInput} placeholder="姓名" id="error" />
+                                <Input id="error" onChange={this.handleNameInput} placeholder="姓名" />
                             </FormItem>
 
                             <FormItem
@@ -215,7 +215,7 @@ export default class JoinUs extends React.Component {
                         </Form>
                     </Col>
 
-                    <Col lg={{ span: 7, offset: 4 }} xs={{ span: 0 }} style={{ opacity: 0.8 }}>
+                    <Col lg={{ span: 7, offset: 4 }} xs={{span:0}} style={{ opacity: 0.8 }}>
                         <OrganizationMenu speed="2000"></OrganizationMenu>
                     </Col>
                 </Row>

@@ -31,7 +31,13 @@ export default class Welcome extends React.Component {
                         <Col lg={{ span: 12 }} xs={{ span: 22 }}>
                             <iframe title="welcomeVideo" allowFullScreen={false} framespacing="0" frameBorder="no" border="0" scrolling="no" src="//player.bilibili.com/player.html?aid=10445700&cid=17249672&page=1" style={{ height: "300px", width: "100%", boxShadow: "0px 0px 20px #ccc" }}> </iframe>
                         </Col>
-                        <Col lg={{ span: 8, offset: 2 }} xs={{ offset: 2, span: 20 }}>
+                        
+                        <Col lg={{ span: 8, offset: 2 }} xs={{ span: 20 }}>
+                            <Col xs={{span:24}} lg={{span:0}}>
+                            <br />
+                            <hr />
+                            <br />
+                            </Col>
                             <h2>网络管理委员会</h2>
                             <p>
                                 电子科技大学学生宿舍网络管理委员会（即网管会,英文全称NetUnion,简称NU）,原名网盟。致力于维护电子科技大学沙河校区学生宿舍网络的正常使用.
@@ -58,10 +64,10 @@ export default class Welcome extends React.Component {
                     <h2>组织架构</h2>
                     <hr />
                     <Row>
-                        <Col lg={{ span: 11, offset: 1 }} xs={{ offset: 0 }}>
+                        <Col lg={{ span: 11, offset: 1 }} xs={{ span: 20 }}>
                             <OrganizationMenu speed="1000"></OrganizationMenu>
                         </Col>
-                        <Col lg={{offset:4,span:6}}>
+                        <Col lg={{offset:4,span:6}} xs={{ span: 0 }}>
                         <br/>
                         <br/>
                         <br/>
@@ -77,7 +83,7 @@ export default class Welcome extends React.Component {
                     
 
                     <Row>
-                        <Col className="personInfo" lg={{span:6,offset:1}}>
+                        <Col className="personInfo" lg={{span:6,offset:1}} xs={{ span: 22 }}>
                         <Card
                             hoverable
                             style={{width:"100%"}}
@@ -89,7 +95,7 @@ export default class Welcome extends React.Component {
                             />
                         </Card>
                         </Col>
-                        <Col className="personInfo" lg={{span:6,offset:2}}>
+                        <Col className="personInfo" lg={{span:6,offset:2}} xs={{ span: 22 }}>
                         <Card
                             hoverable
                             style={{width:"100%"}}
@@ -101,7 +107,7 @@ export default class Welcome extends React.Component {
                             />
                         </Card>
                         </Col>
-                        <Col className="personInfo" lg={{span:6,offset:2}}>
+                        <Col className="personInfo" lg={{span:6,offset:2}} xs={{ span: 22 }}>
                         <Card
                             hoverable
                             style={{width:"100%"}}
