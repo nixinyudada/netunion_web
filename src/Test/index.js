@@ -1,16 +1,27 @@
-import { Menu, Icon, Button } from 'antd';
-import React from "react"
+import { DatePicker, Row, Col } from 'antd';
+import React from "react";
+import FormItem from 'antd/lib/form/FormItem';
 
-const SubMenu = Menu.SubMenu;
+export default class DateRange extends React.Component {
 
-class Test extends React.Component {
   render() {
     return (
-      <div style={{ width: 256 }}>
-        123 test
+      <div>
+        <Row>
+          <Col span={12} offset={6}>
+          <FormItem
+            help='qwe'
+          >
+          <DatePicker
+          showTime
+          format="YYYY-MM-DD HH:mm:ss"
+          placeholder="Start"
+        />
+          </FormItem>
+          </Col>
+        </Row>
+       
       </div>
     );
   }
 }
-
-export default Test;

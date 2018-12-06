@@ -4,11 +4,17 @@ import "./index.css"
 
 
 export default class OrganizationMenu extends React.Component {
-    
+    state = {
+        changeAnState:true
+    }
+    componentWillMount(){
+        //console.log(this.props.speed)
+    }
+
     handleAnimateMenu = (num) => {
         let menuUl = this.refs.menuUL
         let menuLi = this.refs.menuUL.getElementsByTagName("li");
-
+       
         // 子菜单数量
         let total = menuLi.length;
         let widthX = menuUl.offsetWidth;
@@ -41,39 +47,49 @@ export default class OrganizationMenu extends React.Component {
 
    
     handleStartAnimateMenu = () => {
-        let speed = 1200;
+        if(this.timeV){
+            clearInterval(this.timeV)
+        }
+        let speed = this.props.speed;
         let i = 0;
-        this.time = setInterval(() => {
+        this.timeV = setInterval(() => {
             this.handleAnimateMenu(i);
             i++;
             if(i > 19){
                 i = 0;
             }
         }, speed);
+            
+       
+        
 
     }
     handleStopAnimateMenu = () => {
-        clearInterval(this.time)
+       clearInterval(this.timeV)
+    }
+    changeAnimateMenuState = () => {
+
     }
 
    componentWillUnmount(){
-       clearInterval(this.time)
+       clearInterval(this.timeV)
+       //console.log("clear...." + Math.floor(Math.random()*10))
    }
     render() {
         this.handleStartAnimateMenu();
         return (
             <div>
-                <div className="menu" onClick={this.handleStopAnimateMenu} ref="menuUL">
-                    <ul>
+                <div className="menu" onClick={this.handleStopAnimateMenu} >
+                    <ul ref="menuUL">
                         <li style={{background:"orange"}}>
-                            <a style={{color:"white"}} href="http://www.baidu.com">运维部</a>
+                            <a style={{lineHeight:"50px",color:"white"}} href="http://www.baidu.com">运维部</a>
                         </li>
                         <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>网络管理员</a></li>
                         <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>系统管理员</a></li>
-                        <li style={{lineHeight:"25px",background:"orange"}}><a style={{color:"white"}} href="http://www.baidu.com">研发部</a></li>
-                        <li><a href="http://www.baidu.com" style={{color:"white"}}>JAVA</a></li>
-                        <li><a href="http://www.baidu.com" style={{color:"white"}}>PHP</a></li>
-                        <li><a href="http://www.baidu.com" style={{color:"white"}}>Web前端</a></li>
+                        <li style={{lineHeight:"25px",background:"orange"}}><a style={{lineHeight:"50px",color:"white"}} href="http://www.baidu.com">研发部</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"50px",color:"white"}}>JAVA</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"50px",color:"white"}}>PHP</a></li>
+                        <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>Web前端</a></li>
                         <li><a href="http://www.baidu.com" style={{lineHeight:"25px",color:"white"}}>UI/视觉设计</a></li>
                     </ul>
                 </div>

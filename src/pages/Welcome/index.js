@@ -1,5 +1,5 @@
 import React from "react"
-import { Breadcrumb, Icon, Row, Col, Skeleton, Card,Button} from "antd"
+import { Breadcrumb, Icon, Row, Col, Skeleton, Card} from "antd"
 import OrganizationMenu from "./../organizationMenu"
 import "./index.css"
 
@@ -17,7 +17,6 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <div>
-                {/* <Button onClick={this.handleLoaded}>show</Button> */}
                 <Skeleton loading={this.state.loading} active={true}>
                     <Breadcrumb>
                         <Breadcrumb.Item>
@@ -30,7 +29,7 @@ export default class Welcome extends React.Component {
 
                     <Row>
                         <Col lg={{ span: 12 }} xs={{ span: 22 }}>
-                            {/* <iframe title="welcomeVideo" allowFullScreen={false} framespacing="0" frameBorder="no" border="0" scrolling="no" src="//player.bilibili.com/player.html?aid=10445700&cid=17249672&page=1" style={{ height: "300px", width: "100%", boxShadow: "0px 0px 20px #ccc" }}> </iframe> */}
+                            <iframe title="welcomeVideo" allowFullScreen={false} framespacing="0" frameBorder="no" border="0" scrolling="no" src="//player.bilibili.com/player.html?aid=10445700&cid=17249672&page=1" style={{ height: "300px", width: "100%", boxShadow: "0px 0px 20px #ccc" }}> </iframe>
                         </Col>
                         <Col lg={{ span: 8, offset: 2 }} xs={{ offset: 2, span: 20 }}>
                             <h2>网络管理委员会</h2>
@@ -60,7 +59,7 @@ export default class Welcome extends React.Component {
                     <hr />
                     <Row>
                         <Col lg={{ span: 11, offset: 1 }} xs={{ offset: 0 }}>
-                            <OrganizationMenu></OrganizationMenu>
+                            <OrganizationMenu speed="1000"></OrganizationMenu>
                         </Col>
                         <Col lg={{offset:4,span:6}}>
                         <br/>
