@@ -7,7 +7,7 @@ export default class OrganizationMenu extends React.Component {
     
     handleAnimateMenu = (num) => {
         let menuUl = this.refs.menuUL
-        let menuLi = this.refs.menuUL.getElementsByTagName("li")
+        let menuLi = this.refs.menuUL.getElementsByTagName("li");
 
         // 子菜单数量
         let total = menuLi.length;

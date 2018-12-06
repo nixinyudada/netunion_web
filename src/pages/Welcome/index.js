@@ -5,10 +5,10 @@ import "./index.css"
 
 export default class Welcome extends React.Component {
     state = {
-        loading: false
+        loading: true
     }
 
-    handleLoaded = () => {
+    componentDidMount(){
         this.setState({
             loading: false
         })
