@@ -1,9 +1,10 @@
 import React from "react"
+import $ from 'jquery'
 import { Button, Icon, Breadcrumb, Row, Col, DatePicker, Timeline, Input, Form,LocaleProvider,message } from "antd"
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 export default class DormFix extends React.Component {
-
+    //16602803351
     state = {
         dormNumber:{
             dormNumberValue:'',
@@ -18,7 +19,7 @@ export default class DormFix extends React.Component {
             commitState:false
         },
         StateDescription:{
-            StateDescriptionNumberValue:'',
+            StateDescriptionValue:'',
             StateDescriptionNotice:'如果您能提供准确的问题描述，这样会帮助我们更好的定位故障所在',
             StateDescriptionState:'',
             commitState:false
@@ -88,6 +89,7 @@ export default class DormFix extends React.Component {
             }else{
                 this.setState({
                     CallNumber:{
+                        CallNumberValue:value,
                         CallNumberState:'success',
                         commitState:true
                     }
@@ -99,7 +101,14 @@ export default class DormFix extends React.Component {
     }
 
     handleStateDescription = (event) => {
-        
+        this.setState({
+            StateDescription:{
+                StateDescriptionValue:event.target.value,
+                StateDescriptionNotice:'如果您能提供准确的问题描述，这样会帮助我们更好的定位故障所在',
+                StateDescriptionState:'success',
+                commitState:false
+            }
+        })
     }
 
     handleDate = (date,dateString) => {
@@ -122,7 +131,22 @@ export default class DormFix extends React.Component {
             寝室号：${this.state.dormNumber.dormNumberValue}
             手机号：${this.state.CallNumber.CallNumberValue}
             保修日期：${this.state.repairDate.repairDateValue}
-        `)
+                `)
+
+            // 提交数据到服务端
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/addRepair",
+                data:{
+                dormNumber:this.state.dormNumber.dormNumberValue,
+                CallNumber:this.state.CallNumber.CallNumberValue,
+                StateDescription:this.state.StateDescription.StateDescriptionValue,
+                repairDate:this.state.repairDate.repairDateValue
+               
+            }   
+            })
+
         }else{
             message.error('表单填写错误！')
         }
