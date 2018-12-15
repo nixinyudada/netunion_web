@@ -1,8 +1,133 @@
 import React from "react"
-import { Button, Icon, Breadcrumb, Row, Col, DatePicker, Timeline, Input, Form,LocaleProvider } from "antd"
+import { Button, Icon, Breadcrumb, Row, Col, DatePicker, Timeline, Input, Form,LocaleProvider,message } from "antd"
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 export default class DormFix extends React.Component {
+
+    state = {
+        dormNumber:{
+            dormNumberValue:'',
+            dormNotice:'请输入正确的寝室号，以便工作人员查找',
+            dormState:'',
+            commitState:false
+        },
+        CallNumber:{
+            CallNumberValue:'',
+            CallNumberNotice:'请输入您的电话号码，以便工作人员联系您',
+            CallNumberState:'',
+            commitState:false
+        },
+        StateDescription:{
+            StateDescriptionNumberValue:'',
+            StateDescriptionNotice:'如果您能提供准确的问题描述，这样会帮助我们更好的定位故障所在',
+            StateDescriptionState:'',
+            commitState:false
+        },
+        repairDate:{
+            repairDateValue:'',
+            repairDateNotice:'您发现这个故障的事件是？',
+            repairDateState:'',
+            commitState:false
+        }
+    }
+
+
+    handleDormNumber = (event) => {
+        let value = event.target.value;
+        if (value.length < 3){
+            this.setState({
+                dormNumber:{
+                    dormNumberValue:'',
+                    dormNotice:'输入字符不能小于3位，谢谢！',
+                    dormState:'error',
+                }
+            })
+        }else if(value.length > 8){
+            this.setState({
+                dormNumber:{
+                    dormNumberValue:'',
+                    dormNotice:'输入字符不能大于8位，谢谢！',
+                    dormState:'error',
+                }
+            })
+        }else{
+            this.setState({
+                dormNumber:{
+                    dormNumberValue:value,
+                    dormState:'success',
+                    commitState:true
+                }
+            })
+        }
+    }
+
+    handleCallNumber = (event) => {
+        let value = event.target.value;
+        this.setState({
+            CallNumber:{
+                CallNumberValue:value
+            }
+        })
+        if (value.length < 11){
+            this.setState({
+                CallNumber:{
+                    CallNumberValue:'',
+                    CallNumberNotice:'请确保是正确的手机号，谢谢！',
+                    CallNumberState:'warning',
+                }
+            })
+        }else{
+            if(!(/^1[3456789]\d{9}$/.test(value))){
+                this.setState({
+                    CallNumber:{
+                        CallNumberValue:'',
+                        CallNumberNotice:'请输入正确的手机号码，谢谢！',
+                        CallNumberState:'error',
+                    }
+                })
+            }else{
+                this.setState({
+                    CallNumber:{
+                        CallNumberState:'success',
+                        commitState:true
+                    }
+                })
+            }  
+        }
+        
+        
+    }
+
+    handleStateDescription = (event) => {
+        
+    }
+
+    handleDate = (date,dateString) => {
+        console.log(dateString)
+        if (dateString){
+            this.setState({
+                repairDate:{
+                    repairDateValue:dateString,
+                    commitState:true
+                }
+            })
+        }
+        
+    }
+
+    handleCommit = () => {
+        console.log(this.state.dormNumber.commitState,this.state.CallNumber.commitState,this.state.repairDate.commitState)
+        if (this.state.dormNumber.commitState && this.state.CallNumber.commitState && this.state.repairDate.commitState){
+            message.info(`
+            寝室号：${this.state.dormNumber.dormNumberValue}
+            手机号：${this.state.CallNumber.CallNumberValue}
+            保修日期：${this.state.repairDate.repairDateValue}
+        `)
+        }else{
+            message.error('表单填写错误！')
+        }
+       
+    }
     render() {
         const FormItem = Form.Item;
         const { TextArea } = Input;
@@ -33,30 +158,31 @@ export default class DormFix extends React.Component {
                             <FormItem
                                 {...formItemLayout}
                                 label="寝室号"
-                                validateStatus="error"
-                                help="请输入正确的寝室号，以便工作人员查找"
+                                hasFeedback
+                                validateStatus={this.state.dormNumber.dormState}
+                                help={this.state.dormNumber.dormNotice}
                             >
-                                <Input placeholder="寝室号" id="error" />
+                                <Input placeholder="寝室号" onChange={this.handleDormNumber} />
                             </FormItem>
 
                             <FormItem
                                 {...formItemLayout}
                                 label="联系电话"
                                 hasFeedback
-                                validateStatus="warning"
-
+                                validateStatus={this.state.CallNumber.CallNumberState}
+                                help={this.state.CallNumber.CallNumberNotice}
                             >
-                                <Input placeholder="联系电话" id="warning" />
+                                <Input placeholder="联系电话" onChange={this.handleCallNumber}  />
                             </FormItem>
 
                             <FormItem
                                 {...formItemLayout}
                                 label="状态描述"
                                 hasFeedback
-                                validateStatus="validating"
-                                help="请稍等，正在检索这个问题的普遍发生原因..."
+                                validateStatus={this.state.StateDescription.StateDescriptionState} 
+                                help={this.state.StateDescription.StateDescriptionNotice} 
                             >
-                                <TextArea rows="4" placeholder="如果你能描述故障，将对我们有很大的帮助" id="validating" />
+                                <TextArea rows="4" onChange={this.handleStateDescription} placeholder='故障描述' />
                             </FormItem>
 
 
@@ -71,13 +197,14 @@ export default class DormFix extends React.Component {
                                     format="YYYY-MM-DD HH:mm:ss"
                                     placeholder="你是多久发现这个故障的？"
                                     style={{width:"100%"}}
+                                    onChange = {this.handleDate}
                                     /></LocaleProvider>
                             </FormItem>
                            
 
                             <FormItem style={{textAlign:"center"}}>
                                
-                                <Button type="primary">
+                                <Button type="primary" onClick={this.handleCommit}>
                                     提交
                                 </Button>
                                 
