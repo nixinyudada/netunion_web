@@ -13,7 +13,7 @@ class App extends React.Component {
         <HeaderNav></HeaderNav>
         <Row>
           <Col span={4}>
-            <LeftNav></LeftNav>
+            <LeftNav></LeftNav> 
           </Col>
           <Col span={20}>
           <Content>

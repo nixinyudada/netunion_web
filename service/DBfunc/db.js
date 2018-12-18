@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // 1. 连接数据库
 
-mongoose.connect('mongodb://localhost/repair',{useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/repairDB',{useNewUrlParser: true})
 
 // 2. 设计集合结构
 
@@ -23,6 +23,6 @@ const CommitDB = new mongoose.Schema({
 
 // 3. 将文档结构发布为模型
 
-const db = mongoose.model('Repair',CommitDB)
+const db = mongoose.model('RepairDB',CommitDB)
 
 module.exports = db
