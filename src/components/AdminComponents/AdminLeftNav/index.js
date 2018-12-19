@@ -16,9 +16,9 @@ class LeftNav extends React.Component {
             collapsedWidth="0"
             defaultCollapsed
             width="150"
-            onBreakpoint={(broken) => { console.log(broken); }}
+            onBreakpoint={(broken) => { /**console.log(broken); */ }}
             onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
+              /**console.log(collapsed, type); */
             }}
           >
             <div className="logo" />

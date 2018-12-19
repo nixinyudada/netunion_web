@@ -1,6 +1,6 @@
 import React from "react"
 import $ from 'jquery'
-import { Button, Icon, Breadcrumb, Row, Col, DatePicker, Timeline, Input, Form,LocaleProvider,message } from "antd"
+import { Button, Icon, Breadcrumb, Row, Col, DatePicker, Timeline, Input, Form,LocaleProvider,message, Modal } from "antd"
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 export default class DormFix extends React.Component {
@@ -29,7 +29,8 @@ export default class DormFix extends React.Component {
             repairDateNotice:'您发现这个故障的事件是？',
             repairDateState:'',
             commitState:false
-        }
+        },
+        captchaCode:false
     }
 
 
@@ -111,7 +112,7 @@ export default class DormFix extends React.Component {
         })
     }
 
-    handleDate = (date,dateString) => {
+    handleDate = (data,dateString) => {
         console.log(dateString)
         if (dateString){
             this.setState({
@@ -124,32 +125,68 @@ export default class DormFix extends React.Component {
         
     }
 
-    handleCommit = () => {
-        console.log(this.state.dormNumber.commitState,this.state.CallNumber.commitState,this.state.repairDate.commitState)
-        if (this.state.dormNumber.commitState && this.state.CallNumber.commitState && this.state.repairDate.commitState){
-            message.info(`
-            寝室号：${this.state.dormNumber.dormNumberValue}
-            手机号：${this.state.CallNumber.CallNumberValue}
-            保修日期：${this.state.repairDate.repairDateValue}
-                `)
+    handleGetCaptchaImg = () => {
+        $.ajax({
+            url:"http://localhost:3000/dormFixCaptchaImg",
+            type:"get",
+            success:function(ret){
+                document.getElementById("captchaImg").innerHTML = ret.img
+            },
+            error:function(err){
+                message.error("获取验证码失败！")
+            }
+        })
+    }
 
-            // 提交数据到服务端
+    handleCaptchaInput = (event) => {
+        let value = event.targte.value
 
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:3000/addRepair",
-                data:{
-                dormNumber:this.state.dormNumber.dormNumberValue,
-                CallNumber:this.state.CallNumber.CallNumberValue,
-                StateDescription:this.state.StateDescription.StateDescriptionValue,
-                repairDate:this.state.repairDate.repairDateValue
-               
-            }   
-            })
+        $.ajax({
+            url:"",
+            
+        })
+    }
 
-        }else{
-            message.error('表单填写错误！')
+    async handleCommit () {
+        ///console.log(this.state.dormNumber.commitState,this.state.CallNumber.commitState,this.state.repairDate.commitState)
+        await this.setState({
+            captchaCode:true
+        })
+        
+        if(this.state.captchaCode){
+            console.log("captcha...")
+            this.handleGetCaptchaImg()
         }
+        // if (this.state.dormNumber.commitState && this.state.CallNumber.commitState && this.state.repairDate.commitState){
+            
+        //     // 验证码！
+            
+
+            
+            
+        //     message.info(`
+        //     寝室号：${this.state.dormNumber.dormNumberValue}
+        //     手机号：${this.state.CallNumber.CallNumberValue}
+        //     保修日期：${this.state.repairDate.repairDateValue}
+        //         `)
+
+        //     // 提交数据到服务端
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "http://localhost:3000/addRepair",
+        //         data:{
+        //         dormNumber:this.state.dormNumber.dormNumberValue,
+        //         CallNumber:this.state.CallNumber.CallNumberValue,
+        //         StateDescription:this.state.StateDescription.StateDescriptionValue,
+        //         repairDate:this.state.repairDate.repairDateValue
+               
+        //     }   
+        //     })
+
+        // }else{
+        //     message.error('表单填写错误！')
+        // }
        
     }
     render() {
@@ -167,6 +204,22 @@ export default class DormFix extends React.Component {
         };
         return (
             <div>
+                <Modal
+                    title="请输入一下验证码"
+                    visible={this.state.captchaCode}
+                >
+                    <div style={{width:"60%",margin:"0 auto"}}>
+                        <div id="captchaImg" style={{float:"left"}}></div>
+                        <Button id="ChangeChangeBtn" style={{float:"right"}}>换一张</Button>
+                    </div>   
+
+                    <p>
+                        &nbsp;
+                    </p>
+                    <p>
+                        <Input style={{width:"60%"}} type="text" onChange={this.handleCaptchaInput} />
+                    </p>
+                </Modal>
                 <Breadcrumb>
                     <Breadcrumb.Item>
                         <Icon type="tool" />
@@ -228,7 +281,7 @@ export default class DormFix extends React.Component {
 
                             <FormItem style={{textAlign:"center"}}>
                                
-                                <Button type="primary" onClick={this.handleCommit}>
+                                <Button type="primary" onClick={this.handleCommit.bind(this)}>
                                     提交
                                 </Button>
                                 

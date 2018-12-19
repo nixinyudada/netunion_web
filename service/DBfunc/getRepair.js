@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const db = require('./db')
 
 function getRepair(callback){
@@ -11,6 +10,7 @@ function getRepair(callback){
         callback(ret)
     }
  })
+ 
 }
 
  module.exports = getRepair
