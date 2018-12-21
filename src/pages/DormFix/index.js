@@ -37,15 +37,15 @@ export default class DormFix extends React.Component {
 
     handleDormNumber = (event) => {
         let value = event.target.value;
-        if (value.length < 3){
+        if (value.length < 8){
             this.setState({
                 dormNumber:{
                     dormNumberValue:value,
-                    dormNotice:'输入字符不能小于3位，谢谢！',
+                    dormNotice:'要详细一点，输入字符不能小于8位，谢谢！',
                     dormState:'error',
                 }
             })
-        }else if(value.length > 8){
+        }else if(value.length > 15){
             this.setState({
                 dormNumber:{
                     dormNumberValue:value,

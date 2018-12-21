@@ -25,7 +25,7 @@ class LeftNav extends React.Component {
             <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1"
               >
-                <NavLink to="/welcome">
+                <NavLink to="/index/welcome">
                   <Icon type="user" />
                   <span>
                     欢迎！
@@ -33,7 +33,7 @@ class LeftNav extends React.Component {
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="2">
-                <NavLink to="/dormFix">
+                <NavLink to="/index/dormFix">
                   <Icon type="tool" />
                   <span>
                       寝室报修
@@ -41,7 +41,7 @@ class LeftNav extends React.Component {
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="3">
-                <NavLink to="/joinUs">
+                <NavLink to="/index/joinUs">
                 <Icon type="usergroup-add" />
                   <span>
                       加入我们
@@ -49,7 +49,7 @@ class LeftNav extends React.Component {
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="4">
-                <NavLink to="/feedback">
+                <NavLink to="/index/feedback">
                 <Icon type="solution" />
                   <span>
                     意见反馈

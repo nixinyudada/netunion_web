@@ -36,7 +36,7 @@ var data1 = {
 
 function DormFixInsert(data, callback) {
     try {
-        console.log(data)
+        // console.log(data)
         var opera = new dormfix(data)
 
         opera.save((err, ret) => {
@@ -44,8 +44,7 @@ function DormFixInsert(data, callback) {
                 console.log("插入失败！")
                 callback(false, "插入失败！")
             } else {
-                console.log("插入成功！", ret.dormNum)
-                callback(true, "插入成功！")
+                // console.log("插入成功！", ret.dormNum)
                 // 给工作人员发送邮件
                 var sendData = {
                     from: "UESTC NETUNION 940306566@qq.com",
@@ -59,7 +58,8 @@ function DormFixInsert(data, callback) {
                     //     }
                     // ]
                 }
-                //sendMail.sendMail("940306566@qq.com","jklkbcbsfwrsbeaa",sendData)
+                sendMail.sendMail("940306566@qq.com","jklkbcbsfwrsbeaa",sendData)
+                callback(true, "插入成功！")
             }
         })
     } catch (e) {
