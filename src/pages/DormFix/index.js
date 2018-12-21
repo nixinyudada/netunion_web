@@ -30,7 +30,8 @@ export default class DormFix extends React.Component {
             repairDateState:'',
             commitState:false
         },
-        captchaCode:false
+        captchaCode:false,
+        captchaText:""
     }
 
 
@@ -39,7 +40,7 @@ export default class DormFix extends React.Component {
         if (value.length < 3){
             this.setState({
                 dormNumber:{
-                    dormNumberValue:'',
+                    dormNumberValue:value,
                     dormNotice:'输入字符不能小于3位，谢谢！',
                     dormState:'error',
                 }
@@ -47,7 +48,7 @@ export default class DormFix extends React.Component {
         }else if(value.length > 8){
             this.setState({
                 dormNumber:{
-                    dormNumberValue:'',
+                    dormNumberValue:value,
                     dormNotice:'输入字符不能大于8位，谢谢！',
                     dormState:'error',
                 }
@@ -65,15 +66,10 @@ export default class DormFix extends React.Component {
 
     handleCallNumber = (event) => {
         let value = event.target.value;
-        this.setState({
-            CallNumber:{
-                CallNumberValue:value
-            }
-        })
         if (value.length < 11){
             this.setState({
                 CallNumber:{
-                    CallNumberValue:'',
+                    CallNumberValue:value,
                     CallNumberNotice:'请确保是正确的手机号，谢谢！',
                     CallNumberState:'warning',
                 }
@@ -82,7 +78,7 @@ export default class DormFix extends React.Component {
             if(!(/^1[3456789]\d{9}$/.test(value))){
                 this.setState({
                     CallNumber:{
-                        CallNumberValue:'',
+                        CallNumberValue:value,
                         CallNumberNotice:'请输入正确的手机号码，谢谢！',
                         CallNumberState:'error',
                     }
@@ -113,7 +109,7 @@ export default class DormFix extends React.Component {
     }
 
     handleDate = (data,dateString) => {
-        console.log(dateString)
+        
         if (dateString){
             this.setState({
                 repairDate:{
@@ -139,54 +135,103 @@ export default class DormFix extends React.Component {
     }
 
     handleCaptchaInput = (event) => {
-        let value = event.targte.value
+        var v = event.target.value
+        this.setState({
+            captchaText:v
+        })
+        // console.log(this.state.captchaText)
+    }
 
+    handleOnokModal = () => {
+        
+        var that = this
         $.ajax({
-            url:"",
-            
+            url:"http://localhost:3000/dormFixCaptchaText",
+            type:"post",
+            data:{
+                captchaText:this.state.captchaText,
+                dormNum:this.state.dormNumber.dormNumberValue,
+                callNum:this.state.CallNumber.CallNumberValue,
+                userDescr:this.state.StateDescription.StateDescriptionValue,
+                findDate:this.state.repairDate.repairDateValue,
+                state:0,
+                adminLog:"还未填写",
+                admingUpdateTime:"无"
+            },
+            success:function (ret) {
+                
+                console.log(ret)
+
+                if (!ret.codeify){
+                    Modal.error({
+                        title:"验证码错误！",
+                    })
+                    that.handleGetCaptchaImg()
+                    that.setState({ captchaText:""})
+                    return;
+                }
+
+                if (ret.msgBool){
+                    that.setState({
+                        captchaCode:false
+                    })
+                    Modal.success({
+                        title:"提交成功！",
+                        content:(
+                            <p>你的故障申请已被提交，工作人员会很快响应 ^_^</p>
+                        )
+                    })
+
+                    that.setState({
+                        dormNumber:{
+                            dormNumberValue:""
+                        },
+                        CallNumber:{
+                            CallNumberValue:""
+                        },
+                        StateDescription:{
+                            StateDescriptionValue:""
+                        }
+                    })
+                }
+            },
+            error:function (err){
+                Modal.error({
+                    title:"出错了！",
+                    content:(
+                        <div>
+                            <p>后台错了点错，请见谅...</p>
+                            <b>您可以直接致电网管会：139****21332</b>
+                        </div>
+                    )
+                })
+            }
         })
     }
 
-    async handleCommit () {
-        ///console.log(this.state.dormNumber.commitState,this.state.CallNumber.commitState,this.state.repairDate.commitState)
-        await this.setState({
-            captchaCode:true
+    handleCancelModal = () => {
+        this.setState({
+            captchaCode:false,
+            captchaText:""
         })
+
+
+    }
+
+    handleCommit () {
         
-        if(this.state.captchaCode){
-            console.log("captcha...")
+        // console.log(this.state.dormNumber.commitState,this.state.CallNumber.commitState,this.state.repairDate.commitState)
+        
+        if (
+            this.state.dormNumber.commitState&&
+            this.state.CallNumber.commitState&&
+            this.state.repairDate.commitState
+            ){
+            this.setState({ captchaCode:true })
             this.handleGetCaptchaImg()
+        }else{
+            message.error('请填写正确的表单数据！')
         }
-        // if (this.state.dormNumber.commitState && this.state.CallNumber.commitState && this.state.repairDate.commitState){
-            
-        //     // 验证码！
-            
-
-            
-            
-        //     message.info(`
-        //     寝室号：${this.state.dormNumber.dormNumberValue}
-        //     手机号：${this.state.CallNumber.CallNumberValue}
-        //     保修日期：${this.state.repairDate.repairDateValue}
-        //         `)
-
-        //     // 提交数据到服务端
-
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "http://localhost:3000/addRepair",
-        //         data:{
-        //         dormNumber:this.state.dormNumber.dormNumberValue,
-        //         CallNumber:this.state.CallNumber.CallNumberValue,
-        //         StateDescription:this.state.StateDescription.StateDescriptionValue,
-        //         repairDate:this.state.repairDate.repairDateValue
-               
-        //     }   
-        //     })
-
-        // }else{
-        //     message.error('表单填写错误！')
-        // }
        
     }
     render() {
@@ -207,17 +252,19 @@ export default class DormFix extends React.Component {
                 <Modal
                     title="请输入一下验证码"
                     visible={this.state.captchaCode}
+                    onCancel={this.handleCancelModal}
+                    onOk={this.handleOnokModal}
                 >
                     <div style={{width:"60%",margin:"0 auto"}}>
                         <div id="captchaImg" style={{float:"left"}}></div>
-                        <Button id="ChangeChangeBtn" style={{float:"right"}}>换一张</Button>
+                        <Button onClick={this.handleGetCaptchaImg} id="ChangeChangeBtn" style={{float:"right"}}>换一张</Button>
                     </div>   
 
                     <p>
                         &nbsp;
                     </p>
                     <p>
-                        <Input style={{width:"60%"}} type="text" onChange={this.handleCaptchaInput} />
+                        <Input value={this.state.captchaText} onChange={this.handleCaptchaInput} style={{width:"60%"}} type="text" />
                     </p>
                 </Modal>
                 <Breadcrumb>
@@ -239,7 +286,7 @@ export default class DormFix extends React.Component {
                                 validateStatus={this.state.dormNumber.dormState}
                                 help={this.state.dormNumber.dormNotice}
                             >
-                                <Input placeholder="寝室号" onChange={this.handleDormNumber} />
+                                <Input value={this.state.dormNumber.dormNumberValue} placeholder="寝室号" onChange={this.handleDormNumber} />
                             </FormItem>
 
                             <FormItem
@@ -249,7 +296,7 @@ export default class DormFix extends React.Component {
                                 validateStatus={this.state.CallNumber.CallNumberState}
                                 help={this.state.CallNumber.CallNumberNotice}
                             >
-                                <Input placeholder="联系电话" onChange={this.handleCallNumber}  />
+                                <Input value={this.state.CallNumber.CallNumberValue} placeholder="联系电话" onChange={this.handleCallNumber}  />
                             </FormItem>
 
                             <FormItem
@@ -259,7 +306,7 @@ export default class DormFix extends React.Component {
                                 validateStatus={this.state.StateDescription.StateDescriptionState} 
                                 help={this.state.StateDescription.StateDescriptionNotice} 
                             >
-                                <TextArea rows="4" onChange={this.handleStateDescription} placeholder='故障描述' />
+                                <TextArea value={this.state.StateDescription.StateDescriptionValue} rows="4" onChange={this.handleStateDescription} placeholder='故障描述' />
                             </FormItem>
 
 

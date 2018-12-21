@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // 1. 连接数据库
 
-mongoose.connect('mongodb://localhost/repairDB',{useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/NetUnion',{useNewUrlParser: true})
 
 // 2. 设计集合结构
 
