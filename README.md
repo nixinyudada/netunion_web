@@ -96,7 +96,7 @@ git io 后面加上项目名
 
 /* "homepage": "https://nixinyudada.github.io/netunion_web", */
 
-####### 安装 MongoDB
+####### 虚拟机安装 MongoDB 与启动
 
 
 1. 下载并解压到指定目录 （注意权限，是否能够访问读写等）
@@ -119,20 +119,27 @@ git io 后面加上项目名
 4. 启动MongoDB
 
 `
->> mongod -dbpath=/home/vagrant/data -logpath=/home/vagrant/mong odb.log -logappend -port=27017 -fork
+>> mongod -dbpath=/home/vagrant/data -logpath=/home/vagrant/mongodb.log -logappend -port=27017 -fork
 `
 
 
 
-
-
-
-
-
-
-启动 mongodb
+本地启动 mongodb
 
 `sudo mongod`
+
+
+
+
+##### React 项目 ``
+
+`package.json`
+```json
+"homepage": ".",
+```
+
+`yarn run build` 
+
 
 
 
