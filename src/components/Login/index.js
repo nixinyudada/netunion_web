@@ -107,7 +107,7 @@ class Login extends React.Component {
         return (
             <div>
                 <br /><br /><br />
-                <h1 style={{ textAlign: "center" }}>欢迎登陆网管会后台管理系统</h1>
+                <h1 style={{ textAlign: "center" }}>网管会后台管理系统</h1>
                 <br />
                 <Row>
                     <Col lg={{ span: 4, offset: 10 }}>

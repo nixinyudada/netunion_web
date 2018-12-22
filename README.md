@@ -130,6 +130,13 @@ git io 后面加上项目名
 
 
 
+启动 mongodb
+
+`sudo mongod`
+
+
+
+
 
 
 
