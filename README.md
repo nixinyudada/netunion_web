@@ -76,6 +76,59 @@ git io 后面加上项目名
 
 
 
+#### 将项目部署到 vagrant virtualBox centos7
+
+###### 安装Node.js
+
+1. wget [ node版本下载地址 ]
+
+2. 解压
+
+3. 配置环境变量
+    `sudo vi /etc/profile`
+
+    ```linux
+        export LC_ALL=C # 语言环境
+
+        export NODE_HOME=/home/vagrant/nodejs-linux-x86_64-3.2.12
+        export PATH=$PATH:$NODE_HOME/bin
+    ```
+
+/* "homepage": "https://nixinyudada.github.io/netunion_web", */
+
+####### 安装 MongoDB
+
+
+1. 下载并解压到指定目录 （注意权限，是否能够访问读写等）
+
+2. 配置到环境变量
+
+    `sudo vi /etc/profile`
+    ```linux
+        export LC_ALL=C # 语言环境
+
+        export MONGODB_HOME=/home/vagrant/mongodb-linux-x86_64-3.2.12
+        export PATH=$PATH:$MONGODB_HOME/bin
+    ```
+
+3. 使配置文件生效
+
+`source /etc/profile`
+
+
+4. 启动MongoDB
+
+`
+>> mongod -dbpath=/home/vagrant/data -logpath=/home/vagrant/mong odb.log -logappend -port=27017 -fork
+`
+
+
+
+
+
+
+
+
 
 
 
