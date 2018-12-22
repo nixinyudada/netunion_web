@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/netunion_web/precache-manifest.e6ca6656f716a28682a125b79a4d706e.js"
+  "/netunion_web/precache-manifest.3a4b4da675a772503c3187a2404922eb.js"
 );
 
 workbox.clientsClaim();
