@@ -30,13 +30,9 @@ var data1 = {
     admingUpdateTime: new Date().toString()
 }
 
-// DormFixInsert(data1,(err,ret)=>{
-//     console.log(ret)
-// })
 
 function DormFixInsert(data, callback) {
     try {
-        // console.log(data)
         var opera = new dormfix(data)
 
         opera.save((err, ret) => {
@@ -51,14 +47,9 @@ function DormFixInsert(data, callback) {
                     to: "940306566@qq.com", // 收件人
                     subject: ret.dormNum + "有一个报修！",
                     html: "<b>用户故障描述是：" + ret.userDescr + "<br/>联系电话" + ret.callNum + "<br/>用户故障发现的时间：" + ret.findDate + "</b>",
-                    // attachments:[
-                    //     {
-                    //         filename:"", // 文件名称
-                    //         path:"" // 文件路径
-                    //     }
-                    // ]
                 }
-                sendMail.sendMail("940306566@qq.com","jklkbcbsfwrsbeaa",sendData)
+                // 如要发邮件 需要 邮件账号 和 授权码
+                // sendMail.sendMail("邮箱","授权码",sendData)
                 callback(true, "插入成功！")
             }
         })

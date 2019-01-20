@@ -73,7 +73,6 @@ export default class HeaderNav extends React.Component {
           </Col>
 
           <Col lg={{ span: 6, offset: 2 }} sm={{ span: 0 }} xs={{ span: 0 }} >
-            <a href="http://www.is.uestc.edu.cn/" target="view_window"><img style={{ width: "100%", height: "30px", margin: "15px 0px" }} src="http://www.is.uestc.edu.cn/assets/img/logo3-default.png" alt="电子科技大学信息与软件学院" /></a>
           </Col>
 
           <Col lg={{ span: 5, offset: 2 }} sm={{ span: 0 }} xs={{ span: 0 }}>
@@ -92,8 +91,6 @@ export default class HeaderNav extends React.Component {
           <Col lg={{ span: 2, offset: 2 }} xs={{span:0}} sm={{span:0}} style={{ lineHeight: "60px" }}>
             <a href="http://www.baidu.com" style={{ color: "#00a4dd" }}>网络报修 <Icon type="tool" /></a>
           </Col>
-          
-
         </Row>
       </div>
     );

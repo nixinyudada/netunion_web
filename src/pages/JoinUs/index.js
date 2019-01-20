@@ -1,5 +1,5 @@
 import React from "react"
-import { Icon, Breadcrumb, Row, Col, Form, Input, Button, AutoComplete, Select,Modal } from "antd"
+import { Icon, Breadcrumb, Row, Col, Form, Input, Button, AutoComplete, Select, Modal } from "antd"
 import OrganizationMenu from "../organizationMenu";
 
 const Option = AutoComplete.Option;
@@ -7,12 +7,16 @@ const { TextArea } = Input;
 export default class JoinUs extends React.Component {
     state = {
         result: [],
-        job:[],
-        name:"",
-        college:"",
-        specialty:"",
-        email:"",
-        selfInfo:""
+        job: [],
+        name: "",
+        email: "",
+        selfInfo: "",
+        InputIcon:{
+            name:"",
+            email:"",
+            job:"",
+            selfInfo:""
+        }
     }
 
     handleSearch = (value) => {
@@ -27,71 +31,132 @@ export default class JoinUs extends React.Component {
 
 
 
-    
-
-
     handleNameInput = (event) => {
         console.log(event.target.value)
-        this.setState({
-            name:event.target.value
-        })
-    }
-
-    handleCollegeInput = (event) => {
-        console.log(event.target.value)
-        this.setState({
-            college:event.target.value
-        })
-    }
-
-    handleSpecialtyInput = (event) => {
-        console.log(event.target.value)
-        this.setState({
-            specialty:event.target.value
-        })
+        if(event.target.value !== ""){
+            this.setState({
+                name: event.target.value,
+                InputIcon:{
+                    name:"success"
+                }
+            })
+        }else{
+            this.setState({
+                name: "",
+                InputIcon:{
+                    name:"error"
+                }
+            })
+        }
+        
     }
 
     handleEmailInput = (value) => {
-        this.setState({
-            email:value
-        })
+        let re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+        if (re.test(value)){
+            this.setState({
+                email: value,
+                InputIcon:{
+                    email:"success"
+                }
+            })
+        }else{
+            this.setState({
+                email: "",
+                InputIcon:{
+                    email:"warning"
+                }
+            })
+        }
     }
 
-    handleJobInput = (value,option) => {
+    handleJobInput = (value, option) => {
         let job = []
-        option.map((value)=>{
-            let {props} = value;
+        option.map((value) => {
+            let { props } = value;
             job.push(props.value)
             return ""
         })
-
         this.setState({
-            job
+            job,
         })
+        if (job.length > 0 ){
+            this.setState({
+                InputIcon:{
+                    job:"success"
+                }
+            })
+        }else{
+            this.setState({
+                InputIcon:{
+                    job:"error"
+                }
+            })
+        }
+        
     }
 
     handleSelfInfoInput = (event) => {
-        console.log(event.target.value)
+        let selfMsg = event.target.value;
         this.setState({
-            selfInfo:event.target.value
+            selfInfo: event.target.value,
+            InputIcon:{
+                selfInfo:""
+            }
         })
+        if (selfMsg.length >= 100){
+            this.setState({
+                InputIcon:{
+                    selfInfo:"success"
+                }
+            })
+        }
     }
 
     handleCommit = () => {
-        Modal.info({
-            title: '表单提交信息',
-            content: (
-              <div>
-                <p>姓名：{this.state.name}</p>
-                <p>学院：{this.state.college}</p>
-                <p>专业：{this.state.specialty}</p>
-                <p>邮箱：{this.state.email}</p>
-                <p>应聘职位：{this.state.job}</p>
-                <p>自我介绍：{this.state.selfInfo}</p>
-              </div>
-            ),
-            onOk() {},
-          });
+        if(this.state.name === ""){
+            this.setState({
+                InputIcon:{
+                    name:"error"
+                }
+            })
+        }else if(this.state.email === ""){
+            this.setState({
+                InputIcon:{
+                    email:"error"
+                }
+            })
+        }else if(!this.state.job.length > 0){
+            this.setState({
+                InputIcon:{
+                    job:"error"
+                }
+            })
+        }else if(this.state.selfInfo.length < 100){
+            this.setState({
+                InputIcon:{
+                    selfInfo:"error"
+                }
+            })
+        }else{
+            console.log(this.state.job)
+            Modal.info({
+                title: '表单提交信息',
+                content: (
+                    <div>
+                        <p>姓名：{this.state.name}</p>
+                        <p>邮箱：{this.state.email}</p>
+                        <p>应聘职位：{this.state.job}</p>
+                        <p>自我介绍：{this.state.selfInfo}</p>
+                    </div>
+                ),
+                onOk() { },
+            });
+
+        }
+
+
+        
 
     }
     render() {
@@ -121,44 +186,24 @@ export default class JoinUs extends React.Component {
                 <hr style={{ borderColor: "#00a4dd", margin: "10px 0px" }} />
                 <h4 style={{ marginBottom: "10px" }}>欢迎加入电子科技大学
                 沙河网络管理委员会</h4>
+                <br/>
                 <Row>
-                    <Col lg={{ span: 10, offset: 1 }} xs={{span:22}}>
+                    <Col lg={{ span: 10, offset: 1 }} xs={{ span: 22 }}>
                         <Form>
                             <FormItem
                                 {...formItemLayout}
                                 label="姓名"
-                                validateStatus="error"
+                                validateStatus={this.state.InputIcon.name}
                                 hasFeedback
-                                help="该项不能为空！"
                             >
                                 <Input id="error" onChange={this.handleNameInput} placeholder="姓名" />
                             </FormItem>
 
                             <FormItem
                                 {...formItemLayout}
-                                label="学院"
-                                hasFeedback
-                                validateStatus="warning"
-                                help="请勿输入非法字符！"
-                            >
-                                <Input onChange={this.handleCollegeInput} placeholder="学院" id="warning" />
-                            </FormItem>
-
-                            <FormItem
-                                {...formItemLayout}
-                                label="专业"
-                                hasFeedback
-                                validateStatus="success"
-
-                            >
-                                <Input onChange={this.handleSpecialtyInput} placeholder="专业" id="success" />
-                            </FormItem>
-
-                            <FormItem
-                                {...formItemLayout}
                                 label="邮箱"
                                 hasFeedback
-                                validateStatus="success"
+                                validateStatus={this.state.InputIcon.email}
                             >
                                 <AutoComplete
                                     onSearch={this.handleSearch}
@@ -173,14 +218,13 @@ export default class JoinUs extends React.Component {
                                 {...formItemLayout}
                                 label="应聘职位"
                                 hasFeedback
-                                validateStatus="success"
-
+                                validateStatus={this.state.InputIcon.job}
                             >
-                                <Select 
+                                <Select
                                     mode="multiple"
                                     showArrow={true}
                                     allowClear
-                                    onChange={this.handleJobInput} 
+                                    onChange={this.handleJobInput}
                                     placeholder="请选择你要的职位">
                                     <Option value="系统管理员">系统管理员</Option>
                                     <Option value="网络管理员">网络管理员</Option>
@@ -188,21 +232,19 @@ export default class JoinUs extends React.Component {
                                     <Option value="WEB前端">WEB前端</Option>
                                     <Option value="JAVA">JAVA</Option>
                                     <Option value="PHP">PHP</Option>
-                                    
+
                                 </Select>
                             </FormItem>
 
                             <FormItem
                                 {...formItemLayout}
                                 label="自我介绍"
+                                help="应该使用至少100字来介绍你"
                                 hasFeedback
-                                validateStatus="success"
-                                
+                                validateStatus={this.state.InputIcon.selfInfo}
                             >
-                                <TextArea rows="4" onChange={this.handleSelfInfoInput} placeholder="自我介绍" />
+                                <TextArea rows="4" onChange={this.handleSelfInfoInput} placeholder="请写下你为什么能胜任这份工作？" />
                             </FormItem>
-
-
 
 
                             <FormItem style={{ textAlign: "center" }}>
@@ -215,7 +257,7 @@ export default class JoinUs extends React.Component {
                         </Form>
                     </Col>
 
-                    <Col lg={{ span: 7, offset: 4 }} xs={{span:0}} style={{ opacity: 0.8 }}>
+                    <Col lg={{ span: 7, offset: 4 }} xs={{ span: 0 }} style={{ opacity: 0.8 }}>
                         <OrganizationMenu speed="2000"></OrganizationMenu>
                     </Col>
                 </Row>
