@@ -3,3 +3,13 @@
     height: auto;
     margin: 0 auto;
 }
+
+@font-face{
+    font-family: 'setofont';
+    src : url('./站酷文艺体.ttf');
+}
+
+*{
+	font-family: 'setofont';
+    font-size: 16px;
+}
